@@ -69,7 +69,10 @@ table.sudoku {
         background: var(--fixed-bg);
         user-select: none;
     }
-
+    .cell.invalid {
+        background: #ffe9e9 !important;
+        outline: 2px solid #c00;
+    }
     .cell.input {
         /* para <input> */
         appearance: textfield; /* quita spinners en la mayoría */
