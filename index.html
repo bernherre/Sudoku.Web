@@ -7,7 +7,8 @@
 
     <!-- ⚙️ Base path ajustado al nombre del repo -->
     <base href="/Sudoku.Web/" />
-
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#111111" />
     <link rel="stylesheet" href="css/site.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
 </head>
@@ -15,5 +16,15 @@
     <div id="app">Cargando Sudoku...</div>
 
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        // Registra service worker correcto según build
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const base = document.querySelector('base')?.getAttribute('href') || '/';
+                // En publish, Blazor sustituye este archivo por service-worker.published.js
+                navigator.serviceWorker.register(base + 'service-worker.js');
+            });
+        }
+    </script>
 </body>
 </html>
