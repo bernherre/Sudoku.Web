@@ -1,0 +1,109 @@
+/* ——— base ——— */
+:root {
+    --cell: 48px; /* tamaño de cada celda */
+    --thin: 1px; /* borde fino */
+    --thick: 2.5px; /* borde caja */
+    --grid: #777; /* color borde fino */
+    --grid-strong: #000; /* borde grueso */
+    --fixed-bg: #eee; /* fondo de pistas fijas */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+main, .page {
+    padding: 16px;
+}
+
+h3 {
+    margin: 0 0 12px;
+}
+
+/* ——— tablero ——— */
+table.sudoku {
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+    table.sudoku td {
+        width: var(--cell);
+        height: var(--cell);
+        padding: 0;
+        border: var(--thin) solid var(--grid);
+        box-sizing: border-box;
+    }
+
+        /* bordes externos gruesos */
+        table.sudoku td.edge-left {
+            border-left: var(--thick) solid var(--grid-strong);
+        }
+
+        table.sudoku tr:first-child td,
+        table.sudoku td.edge-top {
+            border-top: var(--thick) solid var(--grid-strong);
+        }
+
+        /* bordes de cajas gruesos */
+        table.sudoku td.box-right {
+            border-right: var(--thick) solid var(--grid-strong);
+        }
+
+        table.sudoku td.box-bottom {
+            border-bottom: var(--thick) solid var(--grid-strong);
+        }
+
+/* ——— celda fija / editable ——— */
+.cell {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+    .cell.fixed {
+        background: var(--fixed-bg);
+        user-select: none;
+    }
+    .cell.invalid {
+        background: #ffe9e9 !important;
+        outline: 2px solid #c00;
+    }
+    .cell.input {
+        /* para <input> */
+        appearance: textfield; /* quita spinners en la mayoría */
+        -moz-appearance: textfield;
+        border: none;
+        outline: none;
+        background: #fff;
+        text-align: center;
+        font: inherit;
+        font-weight: 600;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+        /* oculta flechas en Chrome */
+        .cell.input::-webkit-outer-spin-button,
+        .cell.input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+/* estado de error si lo marcas con clase .error */
+td.error .cell {
+    background: #ffeaea;
+    outline: 2px solid #e53935;
+}
+
+/* ——— controles ——— */
+select, button {
+    font: inherit;
+    padding: 6px 10px;
+    margin-right: 6px;
+}
